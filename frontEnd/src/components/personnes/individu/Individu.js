@@ -66,13 +66,11 @@ export default function Individu() {
   const showDeleteModal = (id) => {
     setId(id);
     setDeleteMessage(
-      `Etes vous sûre de vouloir supprimer l'individu If°${
-        users.find((x) => x.cin === id).cin
-      } 
-      ${users.find((x) => x.cin === id).nom} 
-      ${
-        users.find((x) => x.cin === id).prenom
-      } definitivement de notre base de donnée ?`
+      `Etes vous sûre de vouloir supprimer l'individu,
+      ${users.find((x) => x.id === id).identification}(ID°) -|-  
+      ${users.find((x) => x.id === id).nom}(Nom) -|- 
+      ${users.find((x) => x.id === id).cin}(CIN°),  
+      définitivement de notre base de donnée ?`
     );
     setDisplayConfirmationModal(true);
   };
@@ -88,10 +86,6 @@ export default function Individu() {
 
       if (response.data.success) {
         toast.success("Suppression Reussi.");
-      } else if (response.data.errno === 1451) {
-        toast.error(
-          "Suppression non effectuer ! L'individu possede un etat requerant !"
-        );
       } else {
         toast.error("Echec de la suppression!");
       }
@@ -102,14 +96,17 @@ export default function Individu() {
   //#region   //----- MA RECHERCHE -----
   const [contenuTab, setContenuTab] = useState(false);
   function rechercheElement(event) {
-    const valeur = event.target.value;
+    let valeur = event.target.value;
+    const searchValue = {valeur}
+
     if (!valeur) {
       getUsers();
       setContenuTab(true);
     } else {
       axios
-        .get(URL_DE_BASE + `recherche/${valeur}`, u_info.opts)
+        .post(URL_DE_BASE + `recherche`, searchValue, u_info.opts)
         .then((response) => {
+          console.log(searchValue);
           if (response.data.success) {
             setUsers(response.data.res);
             setContenuTab(true);
@@ -231,9 +228,7 @@ export default function Individu() {
               <div className="row">
                 <PersoRequerant />
 
-                {u_info.u_attribut == 1  ? (
-                  <PersoUtilisateur />
-                ) : null}
+                {u_info.u_attribut == 1 ? <PersoUtilisateur /> : null}
 
                 <NouveauPersoIndividu />
               </div>
@@ -249,10 +244,11 @@ export default function Individu() {
                         <table className="table table-striped w-auto">
                           <thead>
                             <tr>
+                              <th scope="col">Photo</th>
                               <th scope="col">Numéro de CIN</th>
                               <th scope="col">Nom </th>
                               <th scope="col">Prénom</th>
-                              <th scope="col">Etat Civil</th>
+                              <th scope="col">Numéro de téléphone</th>
                               <th scope="col" className="text-center">
                                 +Details
                               </th>
@@ -268,13 +264,26 @@ export default function Individu() {
                             {contenuTab || users.length !== 0 ? (
                               currentItems.map((user, key) => (
                                 <tr key={key}>
-                                  <th scope="row">{user.cin} </th>
+                                  <th scope="row">
+                                    <img
+                                      src={
+                                        process.env.PUBLIC_URL +
+                                        `/picture/pdp/DSC_0101.JPG`
+                                      }
+                                      style={{
+                                        width: "45px",
+                                        borderRadius: "2%",
+                                      }}
+                                      alt="pdp"
+                                    />
+                                  </th>
+                                  <td>{user.cin} </td>
                                   <td>{user.nom}</td>
                                   <td>{user.prenom}</td>
-                                  <td>{user.etatCivil}</td>
+                                  <td>{user.numTel}</td>
                                   <td className="text-center">
                                     <Link
-                                      to={`/viewIndividu/${user.cin}`}
+                                      to={`/viewIndividu/${user.id}`}
                                       type="button"
                                       className="btn btn-outline-success btn-sm m-1 waves-effect"
                                       variant="default"
@@ -289,21 +298,17 @@ export default function Individu() {
                                       className="btn btn-outline-primary btn-sm m-1 waves-effect"
                                       variant="default"
                                       name="numCompteEdit"
-                                      onClick={() => showEditModal(user.cin)}
+                                      onClick={() => showEditModal(user.id)}
                                     >
                                       <BsPencilSquare />
                                     </button>
 
-                                    {u_info.u_attribut === "Chef" ||
-                                    u_info.u_attribut === "Chef Adjoint" ||
-                                    u_info.u_attribut === "Administrateur" ? (
+                                    {u_info.u_attribut == 1 ? (
                                       <button
                                         type="button"
                                         className="btn btn-outline-danger btn-sm m-1 waves-effect"
                                         variant="default"
-                                        onClick={() =>
-                                          showDeleteModal(user.cin)
-                                        }
+                                        onClick={() => showDeleteModal(user.id)}
                                       >
                                         <BsFillTrashFill />
                                       </button>

@@ -28,7 +28,7 @@ let Utilisateur = function (utilisateur) {
 
 const REQUETE_BASIQUE = `SELECT * FROM USERS WHERE identification = ? OR CIN = ? `;
 
-const REQUETE_ADVANCER = `SELECT id, identification, cin, nom, prenom, dateNais, lieuNais, nomPere, nomMere, domicile, numTel, profession, attribut, statu, numUrg, email, img, fb, mdp, observation FROM USERS `;
+const REQUETE_ADVANCER = `SELECT id, identification, cin, nom, prenom, DATE_FORMAT(dateNais, '%d-%m-%Y') as dateNais, lieuNais, nomPere, nomMere, domicile, numTel, profession, attribut, statu, numUrg, email, img, fb, mdp, observation FROM USERS `;
 const ORDER_BY = ` ORDER BY id DESC `;
 
 const NOTIFICATION_COMPTE = `SELECT count(id) as attenteActivation FROM users WHERE statu = 0 `;
@@ -59,7 +59,7 @@ Utilisateur.addUtilisateur = (newUtilisateur, result) => {
       }
       if (data.length) {
         result(null, {
-          success: true,
+          success: false,
           message: "L'utilisateur existe déjà !",
         });
         return 0;
@@ -115,29 +115,31 @@ Utilisateur.updateUtilisateur = (newUtilisateur, id, result) => {
               return 0;
             }
 
-            if (
-              res[0].identification == newUtilisateur.identification ||
-              res[0].cin == newUtilisateur.cin
-            ) {
-              dbConn.query(
-                `UPDATE users SET ? WHERE id = ${id}`,
-                newUtilisateur,
-                function (err, res) {
-                  if (err) {
-                    result(err, null);
-                  } else {
-                    result(null, { success: true, message: "Reussi" });
+            if (data.length) {
+              if (
+                res[0].identification == newUtilisateur.identification &&
+                res[0].cin == newUtilisateur.cin
+              ) {
+                dbConn.query(
+                  `UPDATE users SET ? WHERE id = ${id}`,
+                  newUtilisateur,
+                  function (err, res) {
+                    if (err) {
+                      result(err, null);
+                    } else {
+                      result(null, { success: true, message: "Reussi" });
+                    }
                   }
-                }
-              );
-            } else {
-              if (data.length) {
+                );
+              } else {
                 result(null, {
-                  success: true,
-                  message: "L'utilisateur existe déjà !",
+                  success: false,
+                  message:
+                    "L'utilisateur existe déjà ! changez la CIN et/ou l'identification !",
                 });
                 return 0;
               }
+            } else {
               dbConn.query(
                 `UPDATE users SET ? WHERE id = ${id}`,
                 newUtilisateur,

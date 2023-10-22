@@ -120,7 +120,6 @@ module.exports.updateUtilisateur = (req, res) => {
     cin,
     nom,
     prenom,
-    dateNais,
     lieuNais,
     nomPere,
     nomMere,
@@ -130,7 +129,6 @@ module.exports.updateUtilisateur = (req, res) => {
     numUrg,
     email,
     fb,
-    mdp,
     observation,
   } = req.body;
 
@@ -139,7 +137,6 @@ module.exports.updateUtilisateur = (req, res) => {
     cin,
     nom,
     prenom,
-    dateNais,
     lieuNais,
     nomPere,
     nomMere,
@@ -149,7 +146,6 @@ module.exports.updateUtilisateur = (req, res) => {
     numUrg,
     email,
     fb,
-    mdp,
     observation,
   };
 
@@ -168,7 +164,6 @@ module.exports.updateUtilisateurByAdministrateur = (req, res) => {
     cin,
     nom,
     prenom,
-    dateNais,
     lieuNais,
     nomPere,
     nomMere,
@@ -178,7 +173,6 @@ module.exports.updateUtilisateurByAdministrateur = (req, res) => {
     numUrg,
     email,
     fb,
-    mdp,
     statu,
     attribut,
     observation,
@@ -189,7 +183,6 @@ module.exports.updateUtilisateurByAdministrateur = (req, res) => {
     cin,
     nom,
     prenom,
-    dateNais,
     lieuNais,
     nomPere,
     nomMere,
@@ -199,7 +192,6 @@ module.exports.updateUtilisateurByAdministrateur = (req, res) => {
     numUrg,
     email,
     fb,
-    mdp,
     statu,
     attribut,
     observation,
@@ -265,7 +257,7 @@ module.exports.deleteUtilisateur = (req, res) => {
 };
 
 module.exports.searchUtilisateur = (req, res) => {
-  let { valeur } = req.body;
+  const { valeur } = req.body;  
   Utilisateur.searchUtilisateur({ valeur }, (err, resp) => {
     if (!err) {
       res.send(resp);
