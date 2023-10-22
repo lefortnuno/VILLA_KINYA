@@ -1,15 +1,15 @@
 export default function getDataUtilisateur() {
   const u_info = {
     u_token: localStorage.token,
+    u_id: localStorage.id,
     u_identification: localStorage.identification,
     u_attribut: localStorage.attribut,
     u_nom: localStorage.nom,
     u_prenom: localStorage.prenom,
-    u_numeroCompte: localStorage.numeroCompte,
     u_statu: localStorage.statu,
-    u_unite: localStorage.unite,
-    u_photoPDP: localStorage.photoPDP,
-    u_u_cin: localStorage.u_cin,
+    u_numTel: localStorage.numTel,
+    u_img: localStorage.img,
+    u_cin: localStorage.cin,
   };
 
   const headOpts = {

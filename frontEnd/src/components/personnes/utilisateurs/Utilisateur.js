@@ -41,6 +41,7 @@ export default function Utilisateur() {
 	}, []);
 
 	function getUsers() {
+
 		axios.get(URL_DE_BASE, u_info.opts).then(function (response) {
 			if (response.status === 200) {
 				setUsers(response.data);

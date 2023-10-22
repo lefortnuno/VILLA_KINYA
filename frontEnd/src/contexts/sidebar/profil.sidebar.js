@@ -7,7 +7,8 @@ export default function ProfilSidebar() {
       <div className="user">
         <div className="photo">
           <img
-            src={process.env.PUBLIC_URL + `/picture/pdp/${u_info.u_photoPDP}`}
+            // src={process.env.PUBLIC_URL + `/picture/pdp/${u_info.u_img}`}
+            src={process.env.PUBLIC_URL + `/picture/pdp/DSC_0101.JPG`}
             alt="pdp"
           />
         </div>
@@ -20,7 +21,9 @@ export default function ProfilSidebar() {
           >
             <span>
               {u_info.u_identification}
-              <span className="user-level">{u_info.u_attribut}</span>
+              <span className="user-level">
+                {u_info.u_attribut == 1 ? "Administrateur" : "Usager"}
+              </span>
               {/* <span className="caret"></span> */}
             </span>
           </a>

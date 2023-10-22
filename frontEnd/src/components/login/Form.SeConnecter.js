@@ -95,6 +95,7 @@ export default function FormulaireSeConnecter() {
             localStorage.setItem(u, utilisateur[u]);
           }
 
+          console.log("utilisateur : ", utilisateur);
         } else {
           setErreurs((values) => ({ ...values, messageErreur: true }));
           setMessages((values) => ({
@@ -124,7 +125,6 @@ export default function FormulaireSeConnecter() {
             <p className="text-danger d-block">{messages.messageErreur}</p>
           ) : null}
         </span>
-
         <div
           className="wrap-input100 validate-input"
           data-validate="Valid email is required: ex@abc.xyz"
@@ -145,7 +145,6 @@ export default function FormulaireSeConnecter() {
             {erreurs.identification ? messages.identification : null}
           </small>
         </div>
-
         <div
           className="wrap-input100 validate-input"
           data-validate="Password is required"
@@ -166,15 +165,14 @@ export default function FormulaireSeConnecter() {
             {erreurs.mdp ? messages.mdp : null}
           </small>
         </div>
-
         <div className="container-login100-form-btn">
           <button className="login100-form-btn" onClick={validation}>
             Se connecter
           </button>
-        </div> <br />
-
+        </div>{" "}
+        <br />
         <div className="text-center p-t-12">
-          <Link to="/accueil/" className="txt2" >
+          <Link to="/accueil/" className="txt2">
             Identifiant / Mot de passe
           </Link>
           <span className="txt1"> oublier ?</span>

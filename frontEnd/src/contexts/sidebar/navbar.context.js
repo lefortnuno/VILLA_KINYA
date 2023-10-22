@@ -27,7 +27,7 @@ export default function NavbarContext() {
 						<span className="badge badge-count">3</span>
 					</Link>
 				</li>
-				{u_info.u_attribut !== "Usager" ? (
+				{u_info.u_attribut == 1 ? (
 					<>
 						<li className="nav-item ">
 							<Link to="/dossier/">

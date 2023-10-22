@@ -231,9 +231,7 @@ export default function Requerant() {
 							<div className="row">
 								<PersoIndividu />
 
-								{u_info.u_attribut === "Chef" ||
-								u_info.u_attribut === "Chef Adjoint" ||
-								u_info.u_attribut === "Administrateur" ? (
+								{u_info.u_attribut == 1 ? (
 									<PersoUtilisateur />
 								) : null}
 

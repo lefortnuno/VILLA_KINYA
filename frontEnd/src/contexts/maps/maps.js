@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Context from "../Context";
-import { libraryList, AjoutLibrary } from "../../api/file.js.js";
+import { libraryList, AjoutLibrary } from "../../api/file.js";
 import { DrapeauFanjakana } from "../../components/accueil/drapeauGov";
 import GoogleMap from "../../components/GoogleMapIntegration/GoogleMap";
 

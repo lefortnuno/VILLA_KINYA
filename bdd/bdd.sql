@@ -28,4 +28,51 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mdp` varchar(255) NOT NULL,
   `observation` varchar(250),
   PRIMARY KEY (`id`)
-) ENGINE = MyISAM AUTO_INCREMENT = 5 DEFAULT CHARSET = latin1;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1;
+
+INSERT INTO
+  `users` (
+    `id`,
+    `cin`,
+    `nom`,
+    `identification`,
+    `prenom`,
+    `dateNais`,
+    `lieuNais`,
+    `nomPere`,
+    `nomMere`,
+    `domicile`,
+    `numTel`,
+    `profession`,
+    `attribut`,
+    `statu`,
+    `numUrg`,
+    `email`,
+    `img`,
+    `fb`,
+    `mdp`,
+    `observation`
+  )
+VALUES
+  (
+    '1',
+    '201011028460',
+    'LEFORT',
+    'LEFORT',
+    'Nomenjanahary Nuno',
+    '2000-07-29',
+    'Toamasina',
+    'RAZANADRABALY José Emile Justin',
+    'RAMIANDRISOA Nirina Noeline',
+    'Rova Lot pressIR 0206',
+    '0380994042',
+    'Etudiant ENI',
+    '1',
+    '1',
+    '0380994042',
+    'Trofelnuno@gmail.com',
+    NULL,
+    'Trofel',
+    '$2b$10$8XtQbv49gR9vEQlP1mUfKeVrrIlj3HP4YqVqVzdphTXsfQgv6zxZa',
+    NULL
+  );
