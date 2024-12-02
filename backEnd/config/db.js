@@ -1,14 +1,18 @@
 "use strict";
 const mysql = require("mysql");
-//local mysql db connection
+
 const dbConn = mysql.createConnection({
-  host: process.env.URL_BDD_HOST,
-  user: process.env.URL_BDD_USER,
-  password: process.env.URL_BDD_MDP,
-  database: process.env.URL_BDD_NAME,
+  host: process.env.SUN_DB_HOST,
+  user: process.env.SUN_DB_USER,
+  password: process.env.SUN_DB_MDP,
+  database: process.env.SUN_DB_NAME,
 });
+
 dbConn.connect(function (err) {
   if (err) throw err;
-  console.log("Connexion base de donnees avec Succes!");
+  console.log(
+    `Connection au base de donnée '${process.env.SUN_DB_NAME}' reussi. `
+  );
 });
+
 module.exports = dbConn;

@@ -1,5 +1,10 @@
-cd D:\PROJET 2023\VILLA_KINYA
+cd D:\ALL\VILLA_KINYA
+
+git add .gitignore
 git add *
-git commit -m "front crud users done ---  next step : account activation "
-git push
-pause
+
+set /p commitMessage="Titre du commit : "
+
+git commit -m "%commitMessage%"
+git push origin main
+@REM pause

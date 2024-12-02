@@ -73,6 +73,6 @@ VALUES
     'Trofelnuno@gmail.com',
     NULL,
     'Trofel',
-    '$2b$10$8XtQbv49gR9vEQlP1mUfKeVrrIlj3HP4YqVqVzdphTXsfQgv6zxZa',
+    '$2b$10$4WBMGWWIiMbljSTSa99Tfur3Wbg9psmXswKck4x30f/30u7kv.pmy',
     NULL
   );

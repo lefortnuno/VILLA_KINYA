@@ -26,10 +26,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname + "/public")));
-
+app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/utilisateur", utilisateurRoute);
 
-app.listen(process.env.PORT || process.env.URL_HOST_IP, () => {
-  console.log(`Ecoute au port ${process.env.PORT} .... `);
+app.listen(process.env.PORT || process.env.IP_HOST, () => {
+  console.log(`Lancé sur ${process.env.IP_HOST}:${process.env.PORT} .... `);
 });
